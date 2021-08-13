@@ -1,0 +1,6 @@
+*.zip
+.idea
+*.DS_Store
+*.log
+.git
+__pycache__

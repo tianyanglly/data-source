@@ -1,0 +1,13 @@
+[Unit]
+Description=data-notify
+After=network.target
+[Service]
+Type=simple
+User=www
+Group=www
+Environment="FLASK_ENV=production"
+WorkingDirectory=/www/wwwroot/data-source/notify
+ExecStart=/usr/local/python3/bin/python3 /www/wwwroot/data-source/notify/main.py
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target

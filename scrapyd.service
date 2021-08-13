@@ -1,0 +1,10 @@
+[Unit]
+Description=scrapyd
+After=network.target
+[Service]
+Type=simple
+Environment="SCRAPY_PROJECT=dev"
+ExecStart=/usr/local/python3/bin/scrapyd
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target

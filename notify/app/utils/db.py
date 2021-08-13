@@ -1,0 +1,3 @@
+
+
+mongo = PyMongo(app)

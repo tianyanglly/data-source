@@ -1,0 +1,44 @@
+COMMON: &common #标识
+  DEBUG: False
+  SECRET_KEY: insecure
+
+  # 数据库连接
+  SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:123456@192.168.8.76:3306/dj?charset=utf8mb4
+  SQLALCHEMY_TRACK_MODIFICATIONS: False
+  # 日志配置文件路径
+  LOGGING_CONFIG_PATH: ./config/logging.yaml
+  # 日志文件存放位置
+  LOGGING_PATH: ./logs
+
+  # 是否开启定时任务,默认不开启
+  SCHEDULER_OPEN: True
+
+  # 定时任务配置
+  SCHEDULER_API_ENABLED: True
+  JOBS:
+    - id: my_job
+      func: app.task.task:my_job
+      trigger: interval # interval表示循环任务
+      seconds: 5
+
+  MONGO_URI: mongodb://dj:123456@192.168.8.76:27017/djData?authMechanism=SCRAM-SHA-256
+
+  SCRAPYD_URL: http://192.168.8.76:6800/schedule.json
+
+  REDIS_URL: redis://:@192.168.8.76:6379/0
+
+DEVELOPMENT: &development
+  <<: *common # 继承common，没有重新定义的变量，使用common变量值
+  DEBUG: True
+
+STAGING: &staging
+  <<: *common
+  SECRET_KEY: sortasecure
+
+PRODUCTION: &production
+  <<: *common
+  SECRET_KEY: UW2MZDP%2doqjLiXE&^51wck16aHdVMR
+  SQLALCHEMY_DATABASE_URI: mysql+pymysql://djOnline:354be604d5c5dfe6@127.0.0.1:3306/dj?charset=utf8mb4
+  MONGO_URI: mongodb://djOnline:xxwc4hlhcr7b1reu58@127.0.0.1:27017/djData?authMechanism=SCRAM-SHA-256
+  SCRAPYD_URL: http://127.0.0.1:6800/schedule.json
+  REDIS_URL: redis://:@127.0.0.1:6379/0

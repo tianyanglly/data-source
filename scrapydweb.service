@@ -1,0 +1,10 @@
+[Unit]
+Description=scrapydweb
+After=network.target
+[Service]
+Type=simple
+WorkingDirectory=/usr/local/python3/lib/python3.9/site-packages/scrapydweb
+ExecStart=/usr/local/python3/bin/scrapydweb
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target

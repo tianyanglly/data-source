@@ -1,0 +1,15 @@
+variables:
+  PROJECT_NAME: data-source
+  DEPLOY_DEV_PATH: /www/wwwroot/
+  DEPLOY_MASTER_PATH: /www/wwwroot/
+
+stages:
+  - deploy
+
+deploy_dev:
+  stage: deploy
+  script:
+    - rsync -avzu --progress --delete --exclude='logs' --exclude='__pycache__' --exclude='build' --exclude='project.egg-info' --exclude='settings.py' -e ssh $CI_PROJECT_DIR www@192.168.8.76:$DEPLOY_DEV_PATH
+    - rsync -avzu --progress --delete --exclude='logs' --exclude='__pycache__' --exclude='build' --exclude='project.egg-info' --exclude='settings.py' -e ssh $CI_PROJECT_DIR www@34.96.253.12:$DEPLOY_DEV_PATH
+  only:
+    - master
